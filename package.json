@@ -1,0 +1,24 @@
+{
+  "name": "findtext",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wzdxt/findtext.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wzdxt/findtext/issues"
+  },
+  "homepage": "https://github.com/wzdxt/findtext#readme",
+  "dependencies": {
+    "ajax-promises": "^1.0.3",
+    "webpack": "^4.28.1",
+    "webpack-cli": "^3.1.2"
+  }
+}

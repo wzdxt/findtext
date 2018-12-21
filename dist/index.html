@@ -1,0 +1,29 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <div>
+    <span>git url:</span>
+    <span>http://</span>
+    <input v-model="domain">
+    <span>/</span>
+    <input v-model="group">
+    <span>/</span>
+    <input v-model="repository">
+  </div>
+  <div>
+    <span>Latest commit:</span>
+    <input v-model="to">
+    <span>compare to</span>
+    <input v-model="from">
+  </div>
+  <div>
+    <button v-on:click="findText">check!</button>
+  </div>
+  <div>
+    {{ gitDiff }}
+  </div>
+</div>
+
+<script src="./main.js"></script>
+<script type="text/javascript">
+</script>
