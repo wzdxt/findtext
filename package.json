@@ -18,6 +18,7 @@
   "homepage": "https://github.com/wzdxt/findtext#readme",
   "dependencies": {
     "ajax-promises": "^1.0.3",
+    "crud-file-server": "^0.10.0",
     "webpack": "^4.28.1",
     "webpack-cli": "^3.1.2"
   }
