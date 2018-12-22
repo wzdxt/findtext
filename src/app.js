@@ -1,3 +1,4 @@
+Vue.use(require('vue-cookies'));
 const ajaxPromises = require('ajax-promises');
 const $ = require('jquery');
 
@@ -19,7 +20,10 @@ new Vue({
   },
   methods: {
     findText: function () {
-      var compareUrl = '/proxy/' + this.protocol + '/' + this.domain + '/' + this.group + '/' + this.repository + '/compare/' + this.from + '...' + this.to;
+      this.$cookies.set('x-protocol', this.protocol);
+      this.$cookies.set('x-domain', this.domain);
+      // var compareUrl = '/proxy/' + this.protocol + '/' + this.domain + '/' + this.group + '/' + this.repository + '/compare/' + this.from + '...' + this.to;
+      var compareUrl = '/' + this.group + '/' + this.repository + '/compare/' + this.from + '...' + this.to;
       console.log(compareUrl);
       ajaxPromises.get(compareUrl)
         .then(function (response) {
