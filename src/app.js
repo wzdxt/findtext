@@ -1,4 +1,5 @@
 const ajaxPromises = require('ajax-promises');
+const $ = require('jquery');
 
 new Vue({
   el: '#app',
@@ -15,16 +16,20 @@ new Vue({
     repository: 'findtext',
     from: 'master~1',
     to: 'master',
-    gitDiff: '',
   },
   methods: {
     findText: function () {
       var compareUrl = '/proxy/' + this.protocol + '/' + this.domain + '/' + this.group + '/' + this.repository + '/compare/' + this.from + '...' + this.to;
       console.log(compareUrl);
       ajaxPromises.get(compareUrl)
-      .then(function(response) {
-        this.gitDiff = response;
-      }.bind(this));
-    }
+        .then(function (response) {
+          $('#git-diff').html(response);
+        }.bind(this))
+        .then(function () {
+          $('#git-diff table.diff-table tr:has(td.blob-code-addition span.x)').each(function (idx, $tr) {
+            console.info($('td.blob-code-addition span.x', $tr).text());
+          });
+        });
+    },
   }
 });
