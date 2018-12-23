@@ -33,8 +33,17 @@ var vpath = (argv.v || '').trimLeft();
 var readOnly = argv.r;
 var logHeadRequests = argv.h;
 
+console.log('listening on :' + port + '/' + vpath + ', serving ' + path);
+
 var proxy = httpProxy.createProxyServer({});
-proxy.on('error', console.error);
+proxy.on('error', function(err, req, res, url) {
+  console.error('error happens: ', err);
+  // console.error('req', req);
+  // console.error('res', res);
+  // console.error('url', url);
+  res.statusCode = 404;
+  res.end(JSON.stringify(err))
+});
 
 http.createServer(function (req, res) {
   isFileExists(path, vpath, req).then(function (local) {
@@ -58,8 +67,6 @@ http.createServer(function (req, res) {
     }
   }).catch(function(err) {console.error(err)});
 }).listen(port);
-
-console.log('listening on :' + port + '/' + vpath + ', serving ' + path);
 
 var isFileExists = function (path, vpath, req) {
   if (path.lastIndexOf('/') !== path.length - 1) {

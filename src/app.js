@@ -1,6 +1,8 @@
+require('../less/app.less');
 Vue.use(require('vue-cookies'));
 const ajaxPromises = require('ajax-promises');
-const $ = require('jquery');
+const $ = jQuery = require('jquery');
+require('bootstrap');
 
 new Vue({
   el: '#app',
@@ -18,10 +20,27 @@ new Vue({
     from: 'master~1',
     to: 'master',
   },
+  mounted: function () {
+    this.protocol = this.$cookies.get('x-protocol') || 'https';
+    this.domain = this.$cookies.get('x-domain') || 'github.com';
+    this.group = this.$cookies.get('x-group') || 'wzdxt';
+    this.repository = this.$cookies.get('x-repository') || 'findtext';
+    this.from = this.$cookies.get('x-from') || 'master~1';
+    this.to = this.$cookies.get('x-to') || 'master';
+  },
   methods: {
-    findText: function () {
+    findText: function (e) {
+      e.preventDefault();
+      this.protocol = this.$refs.protocol.innerText.trim().replace(/\s/g, '');
+      this.domain = this.$refs.domain.innerText.trim().replace(/\s/g, '');
+      this.group = this.$refs.group.innerText.trim().replace(/\s/g, '');
+      this.repository = this.$refs.repository.innerText.trim().replace(/\s/g, '');
       this.$cookies.set('x-protocol', this.protocol);
       this.$cookies.set('x-domain', this.domain);
+      this.$cookies.set('x-group', this.group);
+      this.$cookies.set('x-repository', this.repository);
+      this.$cookies.set('x-from', this.from);
+      this.$cookies.set('x-to', this.to);
       // var compareUrl = '/proxy/' + this.protocol + '/' + this.domain + '/' + this.group + '/' + this.repository + '/compare/' + this.from + '...' + this.to;
       var compareUrl = '/' + this.group + '/' + this.repository + '/compare/' + this.from + '...' + this.to;
       console.log(compareUrl);
