@@ -42,7 +42,7 @@ new Vue({
       this.$cookies.set('x-from', this.from);
       this.$cookies.set('x-to', this.to);
       // var compareUrl = '/proxy/' + this.protocol + '/' + this.domain + '/' + this.group + '/' + this.repository + '/compare/' + this.from + '...' + this.to;
-      var compareUrl = '/' + this.group + '/' + this.repository + '/compare/' + this.from + '...' + this.to;
+      var compareUrl = '/' + this.group + '/' + this.repository + '/compare/' + this.from + '...' + this.to + '?expanded=1';
       console.log(compareUrl);
       ajaxPromises.get(compareUrl)
         .then(function (response) {
